@@ -1,8 +1,14 @@
+import Header from 'components/header'
+import Form from 'components/form'
+import Output from 'components/output'
+
 function App() {
   return (
-    <div>
-      <p>Intersection</p>
-    </div>
+    <>
+      <Header />
+      <Form />
+      <Output />
+    </>
   )
 }
 
