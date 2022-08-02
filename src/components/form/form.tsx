@@ -1,5 +1,5 @@
-import { ChangeEvent, MouseEvent, useState } from 'react'
-import { ComputationArgs, HashSet } from 'context'
+import { ChangeEvent, MouseEvent, useContext, useState } from 'react'
+import { ComputationArgs, HashSet, ISContext } from 'context'
 
 const initialComputationArgs: ComputationArgs = {
   collectionASize: '',
@@ -8,6 +8,7 @@ const initialComputationArgs: ComputationArgs = {
 }
 
 function Form() {
+  const { computation } = useContext(ISContext)
   const [inputs, setInputs] = useState<ComputationArgs>(initialComputationArgs)
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +20,7 @@ function Form() {
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-    console.log(inputs)
+    computation(inputs)
   }
 
   return (

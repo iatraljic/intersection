@@ -1,17 +1,17 @@
 import { useContext } from 'react'
-import { IntersectionContext } from 'context'
+import { ISContext } from 'context'
 
 function Output() {
-  const { intersectionSize, intersectionAlgorithmTime } =
-    useContext(IntersectionContext)
+  const { size, algorithmTime } = useContext(ISContext)
   return (
     <div className='container'>
       <div className='row'>
         <div className='col'>
           <p>
-            Size of the intersection {intersectionSize}
+            Size of the intersection: <strong>{size}</strong>
             <br />
-            Time to run the intersection algorithm {intersectionAlgorithmTime}
+            Time to run the intersection algorithm (ms):{' '}
+            <strong>{algorithmTime}</strong>
           </p>
         </div>
       </div>
