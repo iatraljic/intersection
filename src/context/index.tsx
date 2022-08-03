@@ -1,4 +1,5 @@
 import { createContext, useState, FC, PropsWithChildren } from 'react'
+import { intersection } from 'helpers'
 
 // types, interfaces, enums
 export enum HashSet {
@@ -44,11 +45,11 @@ const ISContextProvider: FC<PropsWithChildren> = ({ children }) => {
     collectionBSize,
     hashSet,
   }) => {
-    const intersection: Set<number> = new Set()
     let iterated: number[]
     let hash: Set<number>
     let start: number
     let end: number
+    let size: number
 
     iterated = setArray(
       hashSet === HashSet.hashSetA ? +collectionBSize : +collectionASize
@@ -60,14 +61,10 @@ const ISContextProvider: FC<PropsWithChildren> = ({ children }) => {
     )
 
     start = performance.now()
-    for (const el of iterated) {
-      if (hash.has(el)) {
-        intersection.add(el)
-      }
-    }
+    size = intersection(iterated, hash)
     end = performance.now()
 
-    setSize(intersection.size)
+    setSize(size)
     setAlgorithmTime(end - start)
   }
 

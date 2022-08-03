@@ -18,7 +18,7 @@ function Form() {
     setInputs((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     computation(inputs)
   }
@@ -82,7 +82,11 @@ function Form() {
 
         <div className='form-group row pt-2 pb-5'>
           <div className='col'>
-            <button className='btn btn-primary w-100' onClick={handleClick}>
+            <button
+              className='btn btn-primary w-100'
+              type='submit'
+              onClick={handleSubmit}
+            >
               Start
             </button>
           </div>
