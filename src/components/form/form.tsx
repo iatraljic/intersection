@@ -1,5 +1,6 @@
-import { ChangeEvent, MouseEvent, useContext, useState } from 'react'
+import { useContext } from 'react'
 import { ComputationArgs, HashSet, ISContext } from 'context'
+import useForm from 'hooks/useform'
 
 const initialComputationArgs: ComputationArgs = {
   collectionASize: '',
@@ -9,23 +10,14 @@ const initialComputationArgs: ComputationArgs = {
 
 function Form() {
   const { computation } = useContext(ISContext)
-  const [inputs, setInputs] = useState<ComputationArgs>(initialComputationArgs)
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const name = event.target.name
-    const value = event.target.value
-
-    setInputs((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = (event: MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-    computation(inputs)
-  }
+  const { inputs, handleChange, handleSubmit } = useForm<ComputationArgs>(
+    initialComputationArgs,
+    (inputs) => computation(inputs)
+  )
 
   return (
     <div className='container pt-5'>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className='row'>
           <div className='form-group col-sm-4'>
             <label htmlFor='inputCollectionA'>Size of collection A</label>
@@ -82,11 +74,7 @@ function Form() {
 
         <div className='form-group row pt-2 pb-5'>
           <div className='col'>
-            <button
-              className='btn btn-primary w-100'
-              type='submit'
-              onClick={handleSubmit}
-            >
+            <button className='btn btn-primary w-100' type='submit'>
               Start
             </button>
           </div>
