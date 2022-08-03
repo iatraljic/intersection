@@ -1,9 +1,10 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from '@testing-library/react'
+import App from './App'
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+test('renders landing page', () => {
+  render(<App />)
+  const labelAElement = screen.getByText('Size of collection A')
+  const labelBElement = screen.getByText('Size of collection B')
+  expect(labelAElement).toBeInTheDocument()
+  expect(labelBElement).toBeInTheDocument()
+})
